@@ -22,7 +22,7 @@ import os
 import shutil
 import typing
 from typing import NoReturn, Union
-
+import shutil
 from etils.epath.typing import PathLike
 
 
@@ -144,7 +144,8 @@ class _OsPathBackend(Backend):
     if self.exists(dst):
       raise FileExistsError(
           f'Cannot rename {path}. Destination {dst} already exists.')
-    os.rename(path, dst)
+    shutil.move(path, dst)
+    # os.rename()
 
   def replace(self, path: PathLike, dst: PathLike) -> None:
     if self.isdir(dst):
